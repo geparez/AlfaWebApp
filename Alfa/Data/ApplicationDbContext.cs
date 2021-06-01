@@ -14,5 +14,6 @@ namespace Alfa.Data
         {
         }
         public DbSet<Alfa.Models.Location> Location { get; set; }
+        public DbSet<Alfa.Models.Screen> Screen { get; set; }
     }
 }
