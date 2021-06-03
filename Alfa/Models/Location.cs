@@ -25,9 +25,6 @@ namespace Alfa.Models
         [MaxLength(11)]
         public string Telefon { get; set; }
 
-        public Location()
-        {
-
-        }
+        List<ScreenLocation> ScreenLocations { get; set; }
     }
 }

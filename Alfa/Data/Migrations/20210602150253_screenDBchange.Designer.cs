@@ -4,14 +4,16 @@ using Alfa.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Alfa.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210602150253_screenDBchange")]
+    partial class screenDBchange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,28 +49,7 @@ namespace Alfa.Data.Migrations
                     b.ToTable("Location");
                 });
 
-            modelBuilder.Entity("Alfa.Models.ScreenLocation", b =>
-                {
-                    b.Property<string>("SerialNumber")
-                        .HasColumnType("nvarchar(12)")
-                        .HasMaxLength(12);
-
-                    b.Property<int?>("LocationID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ScreenId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SerialNumber");
-
-                    b.HasIndex("LocationID");
-
-                    b.HasIndex("ScreenId");
-
-                    b.ToTable("ScreenLocation");
-                });
-
-            modelBuilder.Entity("Alfa.Models.ScreenType", b =>
+            modelBuilder.Entity("Alfa.Models.Screen", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -288,17 +269,6 @@ namespace Alfa.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Alfa.Models.ScreenLocation", b =>
-                {
-                    b.HasOne("Alfa.Models.Location", "Location")
-                        .WithMany("ScreenLocations")
-                        .HasForeignKey("LocationID");
-
-                    b.HasOne("Alfa.Models.ScreenType", "Screen")
-                        .WithMany("ScreenLocations")
-                        .HasForeignKey("ScreenId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

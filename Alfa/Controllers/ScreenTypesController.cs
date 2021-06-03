@@ -10,22 +10,22 @@ using Alfa.Models;
 
 namespace Alfa.Controllers
 {
-    public class ScreensController : Controller
+    public class ScreenTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ScreensController(ApplicationDbContext context)
+        public ScreenTypesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Screens
+        // GET: ScreenTypes
         public async Task<IActionResult> Index()
         {
             return View(await _context.Screen.ToListAsync());
         }
 
-        // GET: Screens/Details/5
+        // GET: ScreenTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Alfa.Controllers
                 return NotFound();
             }
 
-            var screen = await _context.Screen
+            var screenType = await _context.Screen
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (screen == null)
+            if (screenType == null)
             {
                 return NotFound();
             }
 
-            return View(screen);
+            return View(screenType);
         }
 
-        // GET: Screens/Create
+        // GET: ScreenTypes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Screens/Create
+        // POST: ScreenTypes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Brand,Model,SerialNumber")] Screen screen)
+        public async Task<IActionResult> Create([Bind("Id,Brand,Model")] ScreenType screenType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(screen);
+                _context.Add(screenType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(screen);
+            return View(screenType);
         }
 
-        // GET: Screens/Edit/5
+        // GET: ScreenTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Alfa.Controllers
                 return NotFound();
             }
 
-            var screen = await _context.Screen.FindAsync(id);
-            if (screen == null)
+            var screenType = await _context.Screen.FindAsync(id);
+            if (screenType == null)
             {
                 return NotFound();
             }
-            return View(screen);
+            return View(screenType);
         }
 
-        // POST: Screens/Edit/5
+        // POST: ScreenTypes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Brand,Model,SerialNumber")] Screen screen)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Brand,Model")] ScreenType screenType)
         {
-            if (id != screen.Id)
+            if (id != screenType.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Alfa.Controllers
             {
                 try
                 {
-                    _context.Update(screen);
+                    _context.Update(screenType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ScreenExists(screen.Id))
+                    if (!ScreenTypeExists(screenType.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Alfa.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(screen);
+            return View(screenType);
         }
 
-        // GET: Screens/Delete/5
+        // GET: ScreenTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,28 +124,28 @@ namespace Alfa.Controllers
                 return NotFound();
             }
 
-            var screen = await _context.Screen
+            var screenType = await _context.Screen
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (screen == null)
+            if (screenType == null)
             {
                 return NotFound();
             }
 
-            return View(screen);
+            return View(screenType);
         }
 
-        // POST: Screens/Delete/5
+        // POST: ScreenTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var screen = await _context.Screen.FindAsync(id);
-            _context.Screen.Remove(screen);
+            var screenType = await _context.Screen.FindAsync(id);
+            _context.Screen.Remove(screenType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ScreenExists(int id)
+        private bool ScreenTypeExists(int id)
         {
             return _context.Screen.Any(e => e.Id == id);
         }

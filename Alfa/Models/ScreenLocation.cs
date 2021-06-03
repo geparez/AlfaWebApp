@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace Alfa.Models
 {
-    public class Screen
+    public class ScreenLocation
     {
-        public int Id { get; set; }
-         [Required]
-         [MaxLength(15)]
-        public string Brand { get; set; }
+        public ScreenType ScreenType { get; set; }
+        public Location Location { get; set; }
 
-        [Required]
-        [MaxLength(20)]
-        public string Model { get; set; }
-
+        [Key]
         [Required]
         [MaxLength(12)]
         public string SerialNumber { get; set; }
